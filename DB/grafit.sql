@@ -90,13 +90,36 @@ CREATE TABLE `grafit`.`materiali` (
   CONSTRAINT `fk_materiali_adesivi` FOREIGN KEY (`id_adesivo`) REFERENCES `grafit`.`adesivi` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `grafit`.`rese` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `formato` ENUM('Rotolo', 'Foglio', 'Piega'),
+CREATE TABLE `grafit`.`rotoli` (
+  `id` int(11) NOT NULL auto_increment,
+  `nome` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `descrizione` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `unita_di_misura` ENUM('mm','cm','dm','mil','inch','hand'),
+  `diametro_anima` decimal(5,2) NOT NULL,
+  `diametro_esterno` decimal(5,2) NOT NULL,
+  `numero_etichette_x_rotolo` int(11) NOT NULL,
+  `numero_rotoli_x_confezione` int(11) NOT NULL,
   `aggiornato_al` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	ON UPDATE CURRENT_TIMESTAMP,
-   primary key
+  PRIMARY KEY(`id`),
+  KEY (`aggiornato_al`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `grafit`.`fogli` (
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `grafit`.`pieghe` (
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `grafit`.`rese` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `descrizione` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `formato` ENUM('Rotolo', 'Foglio', 'Piega'),
+  `aggiornato_al` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	ON UPDATE CURRENT_TIMESTAMP,
+   primary key (`id`),
+   key (`aggiornato_al`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `grafit`.`etichette` (
